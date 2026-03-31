@@ -1,1 +1,61 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <div class="toolbar-content">
+    <a mat-button class="brand-link" routerLink="/form">
+      Agendamento de Transferências
+    </a>
+
+    <div class="desktop-nav">
+      <a
+        mat-button
+        routerLink="/form"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Nova Transferência
+      </a>
+
+      <a
+        mat-button
+        routerLink="/list"
+        routerLinkActive="active-link"
+      >
+        Extrato de transferências
+      </a>
+    </div>
+
+    <button
+      mat-icon-button
+      class="mobile-menu-button"
+      (click)="menuOpen = !menuOpen"
+      aria-label="Abrir menu de navegação"
+    >
+      <mat-icon>{{ menuOpen ? 'close' : 'menu' }}</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+
+@if (menuOpen) {
+  <div class="mobile-nav">
+    <a
+      mat-button
+      routerLink="/form"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="menuOpen = false"
+    >
+      Nova Transferência
+    </a>
+
+    <a
+      mat-button
+      routerLink="/list"
+      routerLinkActive="active-link"
+      (click)="menuOpen = false"
+    >
+      Extrato de transferências
+    </a>
+  </div>
+}
+
+<div class="page-container">
 <router-outlet />
