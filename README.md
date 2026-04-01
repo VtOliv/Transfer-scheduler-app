@@ -1,59 +1,151 @@
-# TransferSchedulerApp
+# Transfer Scheduler App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.3.
+Interface web para agendamento e consulta de transferências financeiras, desenvolvida em **Angular 21** com **Angular Material**.
 
-## Development server
+Este projeto consome a API do backend `Transfer-scheduler-service`.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 📌 Objetivo
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Permitir ao usuário:
 
-## Code scaffolding
+- Agendar transferências financeiras
+- Visualizar o extrato de transferências agendadas
+- Receber feedback visual sobre sucesso ou erro das operações
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## 🛠️ Tecnologias utilizadas
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Angular 21.2.x
+- Angular Material
+- RxJS
+- Reactive Forms
+- TypeScript
+- HTML / SCSS
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## 🚀 Como executar o projeto
 
-To build the project run:
+### Pré-requisitos
 
-```bash
-ng build
-```
+- Node.js (v18+ recomendado)
+- Angular CLI
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Instalação
 
-## Running unit tests
+    npm install
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Executando
 
-```bash
-ng test
-```
+    ng serve
 
-## Running end-to-end tests
+A aplicação estará disponível em:
 
-For end-to-end (e2e) testing, run:
+    http://localhost:4200
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🔗 Integração com Backend
 
-## Additional Resources
+Este frontend consome a API:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+    http://localhost:8097/transfers
+
+Certifique-se de que o backend esteja rodando antes de iniciar o frontend.
+
+---
+
+## 📡 Funcionalidades
+
+### 🔹 Nova Transferência
+
+- Cadastro de agendamento
+- Validação de campos:
+  - Conta com **10 dígitos**
+  - Valor maior que zero
+  - Data não pode ser anterior à atual
+- Formatação de valor em padrão brasileiro
+- Feedback visual:
+  - Sucesso → Snackbar
+  - Erro → Snackbar com mensagem da API
+
+---
+
+### 🔹 Extrato de Transferências
+
+- Listagem das transferências cadastradas
+- Exibição de:
+  - Conta origem
+  - Conta destino
+  - Valor
+  - Taxa
+  - Data de agendamento
+  - Data da transferência
+- Estado vazio quando não há registros
+- Tratamento de erro com feedback visual
+
+---
+
+## 🎨 Interface
+
+- Angular Material
+- Layout responsivo
+- Navbar adaptável para mobile
+- Componentes utilizados:
+  - MatToolbar
+  - MatFormField
+  - MatInput
+  - MatDatepicker
+  - MatTable
+  - MatSnackBar
+
+---
+
+## 🧠 Decisões arquiteturais
+
+- Uso de **Standalone Components**
+- Separação por responsabilidade:
+  - Component → UI
+  - Service → API
+- Uso de **Reactive Forms** para validação
+- Integração com backend via `HttpClient`
+- Feedback ao usuário com `MatSnackBar`
+- Configuração de locale `pt-BR` para datas e valores
+
+---
+
+## ⚠️ Validações importantes
+
+- Conta deve conter exatamente **10 dígitos numéricos**
+- Valor deve ser maior que zero
+- Data não pode ser anterior à data atual
+- Erros retornados pela API são exibidos ao usuário
+
+---
+
+## 📁 Estrutura do projeto
+
+    src/app
+     ├── components
+     │   ├── transfer-form
+     │   └── transfer-list
+     ├── services
+     │   └── transfer-service
+     ├── app.routes.ts
+     ├── app.config.ts
+
+---
+
+## 📌 Observações
+
+Este projeto foi desenvolvido como parte de um teste técnico, com foco em:
+
+- aderência aos requisitos
+- boas práticas de desenvolvimento
+- organização de código
+- experiência do usuário
+
+---
