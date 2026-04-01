@@ -36,3 +36,34 @@ body {
   margin: 0;
   height: 100%;
 }
+
+/* Snack-bar styling using Angular Material overrides. */
+.snackbar-success {
+  @include mat.snack-bar-overrides(
+    (
+      container-color: #2e7d32,
+      supporting-text-color: #ffffff,
+      button-color: #ffffff,
+    )
+  );
+}
+
+.snackbar-error {
+  @include mat.snack-bar-overrides(
+    (
+      container-color: #c62828,
+      supporting-text-color: #ffffff,
+      button-color: #ffffff,
+    )
+  );
+}
+
+.snackbar-warning {
+  @include mat.snack-bar-overrides(
+    (
+      container-color: #ed6c02,
+      supporting-text-color: #ffffff,
+      button-color: #ffffff,
+    )
+  );
+}
