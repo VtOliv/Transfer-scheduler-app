@@ -1,1 +1,96 @@
-<p>transfer-form works!</p>
+<div class="page-container">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>Agendar Transferência</mat-card-title>
+      <mat-card-subtitle>
+        Preencha os dados para realizar um novo agendamento
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="transfer-form">
+        <div class="form-grid">
+          <mat-form-field appearance="outline">
+            <mat-label>Conta origem</mat-label>
+            <input
+              matInput
+              formControlName="sourceAccount"
+              maxlength="10"
+              placeholder="Ex: 1234567890"
+            />
+            <mat-hint>Conta deve conter 10 dígitos numéricos</mat-hint>
+            @if (form.controls['sourceAccount'].hasError('required')) {
+              <mat-error>A conta de origem é obrigatória</mat-error>
+            }
+            @if (form.controls['sourceAccount'].hasError('pattern')) {
+              <mat-error>A conta de origem deve conter exatamente 10 dígitos</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Conta destino</mat-label>
+            <input
+              matInput
+              formControlName="destinationAccount"
+              maxlength="10"
+              placeholder="Ex: 0987654321"
+            />
+            <mat-hint>Conta deve conter 10 dígitos numéricos</mat-hint>
+            @if (form.controls['destinationAccount'].hasError('required')) {
+              <mat-error>A conta de destino é obrigatória</mat-error>
+            }
+            @if (form.controls['destinationAccount'].hasError('pattern')) {
+              <mat-error>A conta de destino deve conter exatamente 10 dígitos</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Valor</mat-label>
+            <span matPrefix>R$&nbsp;</span>
+            <input
+              matInput
+              type="text"
+              inputmode="decimal"
+              formControlName="amount"
+              placeholder="0,00"
+              (input)="onAmountInput($event)"
+              (blur)="formatAmount()"
+            />
+            @if (form.controls['amount'].hasError('required')) {
+              <mat-error>O valor é obrigatório</mat-error>
+            }
+            @if (form.controls['amount'].hasError('invalidAmount')) {
+              <mat-error>Informe um valor válido</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Data da transferência</mat-label>
+            <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="transferDate"
+                [min]="minDate"
+                placeholder="Selecione a data"
+            />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            @if (form.controls['transferDate'].hasError('required')) {
+              <mat-error>A data da transferência é obrigatória</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="actions">
+          <button mat-stroked-button color="primary" type="button" routerLink="/list">
+            Ver extrato
+          </button>
+
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+            Agendar transferência
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,51 @@
+.page-container {
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px;
+  background: #FAF9FD;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 920px;
+  border-radius: 16px;
+  max-height: 50vh;
+}
+
+.transfer-form {
+  margin-top: 12px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}
