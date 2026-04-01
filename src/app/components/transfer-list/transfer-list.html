@@ -1,1 +1,78 @@
-<p>transfer-list works!</p>
+<div class="page-container">
+  <mat-card class="list-card">
+    <mat-card-header>
+      <mat-card-title>Extrato de Agendamentos</mat-card-title>
+      <mat-card-subtitle>
+        Consulte todas as transferências cadastradas
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="toolbar">
+        <button mat-stroked-button color="primary" routerLink="/">
+          Novo agendamento
+        </button>
+      </div>
+
+      <div class="table-wrapper">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z1 transfer-table">
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let transfer">{{ transfer.id }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="sourceAccount">
+            <th mat-header-cell *matHeaderCellDef>Conta Origem</th>
+            <td mat-cell *matCellDef="let transfer">{{ transfer.sourceAccount }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="destinationAccount">
+            <th mat-header-cell *matHeaderCellDef>Conta Destino</th>
+            <td mat-cell *matCellDef="let transfer">{{ transfer.destinationAccount }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef>Valor</th>
+            <td mat-cell *matCellDef="let transfer">
+              {{ transfer.amount | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fee">
+            <th mat-header-cell *matHeaderCellDef>Taxa</th>
+            <td mat-cell *matCellDef="let transfer">
+              {{ transfer.fee | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="schedulingDate">
+            <th mat-header-cell *matHeaderCellDef>Data Agendamento</th>
+            <td mat-cell *matCellDef="let transfer">
+              {{ transfer.schedulingDate | date:'shortDate' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="transferDate">
+            <th mat-header-cell *matHeaderCellDef>Data Transferência</th>
+            <td mat-cell *matCellDef="let transfer">
+              {{ transfer.transferDate | date:'shortDate' }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+              <div class="empty-state">
+                <mat-icon>receipt_long</mat-icon>
+                <h3>Nenhum agendamento encontrado</h3>
+                <p>Cadastre uma nova transferência para visualizar o extrato.</p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
